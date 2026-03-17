@@ -1,0 +1,337 @@
+import React, { useState } from 'react';
+import './Accounting.css';
+
+const Accounting = () => {
+  // Данные сотрудника
+  const salaryData = {
+    nextPaymentDate: '25.03.2026',
+    nextPaymentAmount: '85 000 ₽',
+    lastSalary: '75 000 ₽',
+    lastAdvance: '25 000 ₽',
+    vacationDaysLeft: 28,
+    sickLeaveBalance: '5 дней оплачено',
+  };
+
+  // Материальная помощь
+  const materialHelp = {
+    available: true,
+    used: false,
+    amount: '50 000 ₽',
+    description: 'Единовременная материальная помощь',
+  };
+
+  // KPI баллы
+  const kpiData = {
+    currentPoints: 850,
+    maxPoints: 1000,
+    period: 'Март 2026',
+    level: 'Отлично',
+    bonus: '15 000 ₽',
+    history: [
+      { month: 'Февраль', points: 920, bonus: '18 000 ₽' },
+      { month: 'Январь', points: 780, bonus: '12 000 ₽' },
+      { month: 'Декабрь', points: 950, bonus: '20 000 ₽' },
+    ]
+  };
+
+  // Расчетные листки
+  const payStubs = [
+    { month: 'Февраль 2026', date: '28.02.2026', salary: '75 000 ₽', advance: '25 000 ₽', bonus: '10 000 ₽', total: '110 000 ₽', status: 'paid' },
+    { month: 'Январь 2026', date: '31.01.2026', salary: '75 000 ₽', advance: '25 000 ₽', bonus: '0 ₽', total: '100 000 ₽', status: 'paid' },
+    { month: 'Декабрь 2025', date: '31.12.2025', salary: '75 000 ₽', advance: '25 000 ₽', bonus: '50 000 ₽', total: '150 000 ₽', status: 'paid' },
+    { month: 'Ноябрь 2025', date: '30.11.2025', salary: '75 000 ₽', advance: '25 000 ₽', bonus: '0 ₽', total: '100 000 ₽', status: 'paid' },
+    { month: 'Октябрь 2025', date: '31.10.2025', salary: '75 000 ₽', advance: '25 000 ₽', bonus: '0 ₽', total: '100 000 ₽', status: 'paid' },
+    { month: 'Сентябрь 2025', date: '30.09.2025', salary: '75 000 ₽', advance: '25 000 ₽', bonus: '0 ₽', total: '100 000 ₽', status: 'paid' },
+  ];
+
+  // Справки
+  const certificates = [
+    { type: '2-НДФЛ', year: '2025', status: 'ready', date: '01.01.2026' },
+    { type: '2-НДФЛ', year: '2024', status: 'ready', date: '01.01.2025' },
+    { type: '3-НДФЛ', year: '2025', status: 'ready', date: '01.01.2026' },
+    { type: 'Справка с места работы', year: '2026', status: 'ready', date: '04.03.2026' },
+    { type: 'Справка о доходах', year: '2026', status: 'ready', date: '04.03.2026' },
+  ];
+
+  // Больничные
+  const sickLeaves = [
+    { id: 'БЛ-2026-001', period: '15.01.2026 — 22.01.2026', days: 8, amount: '18 400 ₽', status: 'paid' },
+    { id: 'БЛ-2025-012', period: '10.11.2025 — 17.11.2025', days: 8, amount: '17 200 ₽', status: 'paid' },
+    { id: 'БЛ-2025-008', period: '05.06.2025 — 10.06.2025', days: 6, amount: '12 900 ₽', status: 'paid' },
+  ];
+
+  // Компенсации
+  const compensations = [
+    { type: 'Питание', amount: '5 000 ₽/мес', status: 'active' },
+    { type: 'Транспорт', amount: '3 000 ₽/мес', status: 'active' },
+    { type: 'ДМС', amount: 'Полный пакет', status: 'active' },
+    { type: 'Обучение', amount: 'до 50 000 ₽/год', status: 'active' },
+  ];
+
+  const [activeTab, setActiveTab] = useState('salary');
+
+  return (
+    <div className="accounting">
+      <h1 className="page-title">💰 Бухгалтерия</h1>
+
+      {/* Сводка */}
+      <div className="salary-summary">
+        <div className="summary-card next-payment">
+          <div className="summary-icon">💸</div>
+          <div className="summary-info">
+            <div className="summary-label">Следующая выплата</div>
+            <div className="summary-value">{salaryData.nextPaymentDate}</div>
+            <div className="summary-amount">{salaryData.nextPaymentAmount}</div>
+          </div>
+        </div>
+
+        <div className="summary-card vacation">
+          <div className="summary-icon">🏖️</div>
+          <div className="summary-info">
+            <div className="summary-label">Остаток отпуска</div>
+            <div className="summary-value">{salaryData.vacationDaysLeft} дней</div>
+            <div className="summary-sub">Доступно для использования</div>
+          </div>
+        </div>
+
+        <div className="summary-card sick">
+          <div className="summary-icon">🏥</div>
+          <div className="summary-info">
+            <div className="summary-label">Больничные</div>
+            <div className="summary-value">{salaryData.sickLeaveBalance}</div>
+            <div className="summary-sub">За последний год</div>
+          </div>
+        </div>
+
+        <div className="summary-card documents">
+          <div className="summary-icon">📄</div>
+          <div className="summary-info">
+            <div className="summary-label">Документы</div>
+            <div className="summary-value">{certificates.length} справок</div>
+            <div className="summary-sub">Доступно для скачивания</div>
+          </div>
+        </div>
+
+        {/* Материальная помощь */}
+        <div className="summary-card material-help">
+          <div className="summary-icon">🎁</div>
+          <div className="summary-info">
+            <div className="summary-label">Материальная помощь</div>
+            <div className="summary-value">
+              {materialHelp.used ? (
+                <span className="status-used">Использовано</span>
+              ) : (
+                <span className="status-available">Доступно</span>
+              )}
+            </div>
+            <div className="summary-amount">{materialHelp.amount}</div>
+            {!materialHelp.used && (
+              <button className="btn-small">Оформить</button>
+            )}
+          </div>
+        </div>
+
+        {/* KPI баллы */}
+        <div className="summary-card kpi">
+          <div className="summary-icon">🏆</div>
+          <div className="summary-info">
+            <div className="summary-label">KPI баллы</div>
+            <div className="summary-value">{kpiData.currentPoints} / {kpiData.maxPoints}</div>
+            <div className="kpi-progress">
+              <div 
+                className="kpi-progress-bar" 
+                style={{ width: `${(kpiData.currentPoints / kpiData.maxPoints) * 100}%` }}
+              ></div>
+            </div>
+            <div className="summary-sub">{kpiData.level} • {kpiData.bonus}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Табы */}
+      <div className="tabs">
+        <button 
+          className={`tab ${activeTab === 'salary' ? 'active' : ''}`}
+          onClick={() => setActiveTab('salary')}
+        >
+          Расчетные листки
+        </button>
+        <button 
+          className={`tab ${activeTab === 'certificates' ? 'active' : ''}`}
+          onClick={() => setActiveTab('certificates')}
+        >
+          Справки
+        </button>
+        <button 
+          className={`tab ${activeTab === 'sick' ? 'active' : ''}`}
+          onClick={() => setActiveTab('sick')}
+        >
+          Больничные
+        </button>
+        <button 
+          className={`tab ${activeTab === 'compensation' ? 'active' : ''}`}
+          onClick={() => setActiveTab('compensation')}
+        >
+          Компенсации
+        </button>
+      </div>
+
+      {/* Контент табов */}
+      <div className="tab-content">
+        
+        {/* Расчетные листки */}
+        {activeTab === 'salary' && (
+          <div className="pay-stubs">
+            <div className="table-header">
+              <h3>История выплат</h3>
+              <button className="btn-primary">📥 Скачать все</button>
+            </div>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Период</th>
+                  <th>Дата</th>
+                  <th>Оклад</th>
+                  <th>Аванс</th>
+                  <th>Премия</th>
+                  <th>Итого</th>
+                  <th>Статус</th>
+                  <th>Действие</th>
+                </tr>
+              </thead>
+              <tbody>
+                {payStubs.map((stub, index) => (
+                  <tr key={index}>
+                    <td className="font-medium">{stub.month}</td>
+                    <td>{stub.date}</td>
+                    <td>{stub.salary}</td>
+                    <td>{stub.advance}</td>
+                    <td>{stub.bonus}</td>
+                    <td className="font-bold">{stub.total}</td>
+                    <td><StatusBadge status={stub.status} /></td>
+                    <td>
+                      <button className="btn-icon" title="Скачать">📥</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Справки */}
+        {activeTab === 'certificates' && (
+          <div className="certificates">
+            <div className="table-header">
+              <h3>Доступные справки</h3>
+              <button className="btn-primary">📝 Заказать новую</button>
+            </div>
+            <div className="certificates-grid">
+              {certificates.map((cert, index) => (
+                <div key={index} className="certificate-card">
+                  <div className="certificate-icon">📄</div>
+                  <div className="certificate-info">
+                    <div className="certificate-type">{cert.type}</div>
+                    <div className="certificate-year">{cert.year} год</div>
+                    <div className="certificate-date">от {cert.date}</div>
+                  </div>
+                  <StatusBadge status={cert.status} small />
+                  <button className="btn-download">⬇️</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Больничные */}
+        {activeTab === 'sick' && (
+          <div className="sick-leaves">
+            <div className="table-header">
+              <h3>История больничных</h3>
+              <button className="btn-primary">🏥 Открыть больничный</button>
+            </div>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Номер</th>
+                  <th>Период</th>
+                  <th>Дней</th>
+                  <th>Сумма</th>
+                  <th>Статус</th>
+                  <th>Действие</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sickLeaves.map((sick, index) => (
+                  <tr key={index}>
+                    <td className="font-medium">{sick.id}</td>
+                    <td>{sick.period}</td>
+                    <td>{sick.days} дн.</td>
+                    <td className="font-bold">{sick.amount}</td>
+                    <td><StatusBadge status={sick.status} /></td>
+                    <td>
+                      <button className="btn-icon" title="Скачать">📥</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Компенсации */}
+        {activeTab === 'compensation' && (
+          <div className="compensations">
+            <div className="table-header">
+              <h3>Мои компенсации</h3>
+              <button className="btn-primary">➕ Добавить компенсацию</button>
+            </div>
+            <div className="compensations-grid">
+              {compensations.map((comp, index) => (
+                <div key={index} className="compensation-card">
+                  <div className="compensation-header">
+                    <div className="compensation-icon">
+                      {comp.type === 'Питание' && '🍽️'}
+                      {comp.type === 'Транспорт' && '🚇'}
+                      {comp.type === 'ДМС' && '🏥'}
+                      {comp.type === 'Обучение' && '🎓'}
+                    </div>
+                    <StatusBadge status={comp.status} small />
+                  </div>
+                  <div className="compensation-type">{comp.type}</div>
+                  <div className="compensation-amount">{comp.amount}</div>
+                  <button className="btn-link">Подробнее →</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+};
+
+// Компонент статуса
+const StatusBadge = ({ status, small = false }) => {
+  const statuses = {
+    paid: { text: 'Выплачено', color: '#10b981', bg: '#d1fae5' },
+    ready: { text: 'Готово', color: '#10b981', bg: '#d1fae5' },
+    active: { text: 'Активно', color: '#3b82f6', bg: '#dbeafe' },
+    pending: { text: 'В обработке', color: '#f59e0b', bg: '#fef3c7' },
+    cancelled: { text: 'Отменено', color: '#6b7280', bg: '#f2f3f7' },
+  };
+
+  const statusInfo = statuses[status] || statuses.pending;
+
+  return (
+    <span 
+      className={`status-badge ${small ? 'small' : ''}`}
+      style={{ backgroundColor: statusInfo.bg, color: statusInfo.color }}
+    >
+      {statusInfo.text}
+    </span>
+  );
+};
+
+export default Accounting;
