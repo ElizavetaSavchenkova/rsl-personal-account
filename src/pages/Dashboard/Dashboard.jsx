@@ -48,7 +48,7 @@ const Dashboard = () => {
         <div className="widget widget-tasks">
           <div className="widget-header">
             <h3>Мои задачи</h3>
-            <span className="badge">{userData.tasksCount}</span>
+            
           </div>
           <div className="tasks-list">
             <div className="task-item urgent">

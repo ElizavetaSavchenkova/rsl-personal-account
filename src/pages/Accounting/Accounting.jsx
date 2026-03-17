@@ -4,8 +4,8 @@ import './Accounting.css';
 const Accounting = () => {
   // Данные сотрудника
   const salaryData = {
-    nextPaymentDate: '25.03.2026',
-    nextPaymentAmount: '85 000 ₽',
+    nextPaymentDate: '31.03.2026',
+    nextPaymentAmount: '70 000 тыс. руб.',
     lastSalary: '75 000 ₽',
     lastAdvance: '25 000 ₽',
     vacationDaysLeft: 28,
@@ -16,22 +16,15 @@ const Accounting = () => {
   const materialHelp = {
     available: true,
     used: false,
-    amount: '50 000 ₽',
+    amount: '15 000 тыс. руб.',
     description: 'Единовременная материальная помощь',
   };
 
   // KPI баллы
   const kpiData = {
-    currentPoints: 850,
-    maxPoints: 1000,
+    currentPoints: 100,
+    maxPoints: 100,
     period: 'Март 2026',
-    level: 'Отлично',
-    bonus: '15 000 ₽',
-    history: [
-      { month: 'Февраль', points: 920, bonus: '18 000 ₽' },
-      { month: 'Январь', points: 780, bonus: '12 000 ₽' },
-      { month: 'Декабрь', points: 950, bonus: '20 000 ₽' },
-    ]
   };
 
   // Расчетные листки
@@ -61,12 +54,12 @@ const Accounting = () => {
   ];
 
   // Компенсации
-  const compensations = [
-    { type: 'Питание', amount: '5 000 ₽/мес', status: 'active' },
-    { type: 'Транспорт', amount: '3 000 ₽/мес', status: 'active' },
-    { type: 'ДМС', amount: 'Полный пакет', status: 'active' },
-    { type: 'Обучение', amount: 'до 50 000 ₽/год', status: 'active' },
-  ];
+  //const compensations = [
+    //{ type: 'Питание', amount: '5 000 ₽/мес', status: 'active' },
+   // { type: 'Транспорт', amount: '3 000 ₽/мес', status: 'active' },
+   // { type: 'ДМС', amount: 'Полный пакет', status: 'active' },
+   // { type: 'Обучение', amount: 'до 50 000 ₽/год', status: 'active' },
+  //];
 
   const [activeTab, setActiveTab] = useState('salary');
 
@@ -119,15 +112,13 @@ const Accounting = () => {
             <div className="summary-label">Материальная помощь</div>
             <div className="summary-value">
               {materialHelp.used ? (
-                <span className="status-used">Использовано</span>
+                <span className="status-used">Выплачено</span>
               ) : (
-                <span className="status-available">Доступно</span>
+                <span className="status-available">Выплачено</span>
               )}
             </div>
             <div className="summary-amount">{materialHelp.amount}</div>
-            {!materialHelp.used && (
-              <button className="btn-small">Оформить</button>
-            )}
+           
           </div>
         </div>
 
@@ -143,7 +134,7 @@ const Accounting = () => {
                 style={{ width: `${(kpiData.currentPoints / kpiData.maxPoints) * 100}%` }}
               ></div>
             </div>
-            <div className="summary-sub">{kpiData.level} • {kpiData.bonus}</div>
+            
           </div>
         </div>
       </div>
@@ -168,12 +159,7 @@ const Accounting = () => {
         >
           Больничные
         </button>
-        <button 
-          className={`tab ${activeTab === 'compensation' ? 'active' : ''}`}
-          onClick={() => setActiveTab('compensation')}
-        >
-          Компенсации
-        </button>
+       
       </div>
 
       {/* Контент табов */}
@@ -279,33 +265,6 @@ const Accounting = () => {
           </div>
         )}
 
-        {/* Компенсации */}
-        {activeTab === 'compensation' && (
-          <div className="compensations">
-            <div className="table-header">
-              <h3>Мои компенсации</h3>
-              <button className="btn-primary">➕ Добавить компенсацию</button>
-            </div>
-            <div className="compensations-grid">
-              {compensations.map((comp, index) => (
-                <div key={index} className="compensation-card">
-                  <div className="compensation-header">
-                    <div className="compensation-icon">
-                      {comp.type === 'Питание' && '🍽️'}
-                      {comp.type === 'Транспорт' && '🚇'}
-                      {comp.type === 'ДМС' && '🏥'}
-                      {comp.type === 'Обучение' && '🎓'}
-                    </div>
-                    <StatusBadge status={comp.status} small />
-                  </div>
-                  <div className="compensation-type">{comp.type}</div>
-                  <div className="compensation-amount">{comp.amount}</div>
-                  <button className="btn-link">Подробнее →</button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
       </div>
     </div>

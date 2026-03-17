@@ -29,10 +29,10 @@ const Vacation = () => {
       remaining: 30,
     },
     unpaid: {
-      total: 14, // За свой счет (максимум в год)
-      used: 3,
-      planned: 0,
-      remaining: 11,
+      
+      used: 5,
+    
+      remaining: 5,
     },
   };
 
@@ -128,7 +128,7 @@ const Vacation = () => {
             <div className="balance-legend">
               <span className="legend-item used">Использовано: {vacationBalance.main.used}</span>
               <span className="legend-item planned">Запланировано: {vacationBalance.main.planned}</span>
-              <span className="legend-item remaining">Остаток: {vacationBalance.main.remaining}</span>
+              <span className="legend-item remaining">Остаток: 14</span>
             </div>
           </div>
         </div>
@@ -171,14 +171,14 @@ const Vacation = () => {
           <div className="summary-icon">📝</div>
           <div className="summary-info">
             <div className="summary-label">За свой счет</div>
-            <div className="summary-value">{vacationBalance.unpaid.remaining} из {vacationBalance.unpaid.total} дней</div>
+            <div className="summary-value">{vacationBalance.unpaid.remaining} дней</div>
             <div className="balance-bar">
               <div className="balance-segment used" style={{ width: `${(vacationBalance.unpaid.used / vacationBalance.unpaid.total) * 100}%` }}></div>
               <div className="balance-segment remaining" style={{ width: `${(vacationBalance.unpaid.remaining / vacationBalance.unpaid.total) * 100}%` }}></div>
             </div>
             <div className="balance-legend">
               <span className="legend-item used">Использовано: {vacationBalance.unpaid.used}</span>
-              <span className="legend-item remaining">Остаток: {vacationBalance.unpaid.remaining}</span>
+              
             </div>
           </div>
         </div>
@@ -384,13 +384,7 @@ const Vacation = () => {
         {/* За свой счет */}
         {activeTab === 'unpaid' && (
           <div className="unpaid-tab">
-            <div className="info-block">
-              <div className="info-icon">ℹ️</div>
-              <div className="info-text">
-                <strong>Отпуск за свой счет</strong> предоставляется по семейным и другим 
-                уважительным причинам на срок до 14 календарных дней в году.
-              </div>
-            </div>
+         
             
             <div className="table-header">
               <h3>История отпусков за свой счет</h3>
@@ -436,7 +430,7 @@ const Vacation = () => {
              
               <div className="overtime-card">
                 <div className="overtime-value">{timeOff.compensatoryDays} дн</div>
-                <div className="overtime-label">Дней отгулов доступно</div>
+                <div className="overtime-label">Доступно</div>
               </div>
             </div>
 
@@ -510,7 +504,7 @@ const VacationForm = ({ onClose }) => {
               <option value="main">Основной отпуск (28 дней)</option>
               <option value="seniority">Дополнительный за стаж (2 дня)</option>
               <option value="study">Учебный отпуск (до 30 дней)</option>
-              <option value="unpaid">За свой счет (до 14 дней)</option>
+              <option value="unpaid">За свой счет</option>
             </select>
           </div>
 

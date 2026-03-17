@@ -6,11 +6,12 @@ const menuItems = [
   { name: 'Главная', icon: '🏠', path: '/' },
   { name: 'Личная информация', icon: '👤', path: '/personal' },
   { name: 'Задачи и поручения', icon: '📋', path: '/tasks', badge: 3 },
-  
+  { name: 'Заявки', icon: '📝', path: '/requests' },
+
   // Раскрывающийся пункт "Сервисы"
-  { 
-    name: 'Сервисы', 
-    icon: '🛠️', 
+  {
+    name: 'Сервисы',
+    icon: '🛠️',
     path: null,
     children: [
       { name: 'Бухгалтерия', icon: '💰', path: '/accounting' },
@@ -18,15 +19,15 @@ const menuItems = [
       { name: 'Справки', icon: '📄', path: '/certificates' },
     ]
   },
+
   
-  { name: 'Заявки', icon: '📝', path: '/requests' },
   { name: 'Документы', icon: '📄', path: '/documents' },
   { name: 'Обучение и развитие', icon: '🎓', path: '/training' },
-   { name: 'Компания', icon: '🏢', path: '/company' },
-    { name: 'Новости', icon: '📢', path: '/news' },
+  { name: 'Компания', icon: '🏢', path: '/company' },
+  { name: 'Новости', icon: '📢', path: '/news' },
   { name: 'Профиль и настройки', icon: '⚙️', path: '/profile' },
- 
- 
+
+
 ];
 
 const Sidebar = () => {
@@ -59,7 +60,7 @@ const Sidebar = () => {
             // Раскрывающийся пункт
             const isExpanded = expandedMenu[item.name];
             const hasActive = hasActiveChild(item.children);
-            
+
             return (
               <div key={item.name} className="sidebar-menu-group">
                 <button
@@ -74,7 +75,7 @@ const Sidebar = () => {
                     ▶
                   </span>
                 </button>
-                
+
                 {isExpanded && (
                   <div className="sidebar-submenu">
                     {item.children.map((child) => (
@@ -109,7 +110,7 @@ const Sidebar = () => {
           }
         })}
       </nav>
-      
+
       <div className="sidebar-footer">
         <button className="sidebar-support">
           <span>🆘</span>

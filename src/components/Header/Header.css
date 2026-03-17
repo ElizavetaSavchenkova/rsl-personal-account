@@ -2,100 +2,112 @@
    HEADER - Шапка личного кабинета
    ======================================== */
 
-.header {
+.main-header {
   background-color: #fff;
   border-bottom: 1px solid #e5e7eb;
-  height: 64px;
+  height: 120px; /* Увеличил с 80px до 120px */
+  min-height: 120px; /* Добавил min-height */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 32px;
+  padding: 0 40px;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* ========================================
-   Левая часть (Логотип)
-   ======================================== */
-
+/* Левая часть */
 .header-left {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  min-width: 280px;
 }
 
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
-.logo-image {
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
+.header-logo-image {
+  width: 100px; /* Увеличил с 56px до 100px */
+  height: 100px; /* Увеличил с 56px до 100px */
+  max-width: 100px; /* Ограничил максимальную ширину */
+  max-height: 100px; /* Ограничил максимальную высоту */
+  object-fit: contain; /* Важно! Сохраняет пропорции */
   border-radius: 8px;
+  flex-shrink: 0; /* Не даёт сжиматься */
 }
 
-.logo-text {
+.header-logo-text {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.logo-title {
-  font-size: 16px;
+.main-header {
+  height: 100px; /* Уменьшил высоту хэдера */
+  min-height: 100px;
+}
+
+.header-logo-image {
+  width: 200px; /* Увеличил */
+  height: 200px; /* Увеличил */
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.header-left {
+  min-width: 120px; /* Уменьшил */
+}
+
+.header-logo-title {
+  font-size: 20px; /* Чуть увеличил */
   font-weight: 700;
   color: #0d4cd3;
   margin: 0;
   line-height: 1.2;
 }
 
-.logo-subtitle {
+.header-logo-subtitle {
   font-size: 12px;
   color: #8590a6;
   margin: 0;
   line-height: 1.2;
 }
 
-/* ========================================
-   Поиск (Центр)
-   ======================================== */
-
+/* Поиск */
 .header-search {
   flex: 1;
-  max-width: 500px;
-  margin: 0 32px;
+  max-width: 600px;
+  margin: 0 40px;
 }
 
-.search-input {
+.header-search-input {
   width: 100%;
-  padding: 10px 16px;
+  padding: 12px 20px;
   background-color: #f2f3f7;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 14px;
   color: #222;
   outline: none;
   transition: all 0.2s ease;
 }
 
-.search-input::placeholder {
+.header-search-input::placeholder {
   color: #8590a6;
 }
 
-.search-input:focus {
+.header-search-input:focus {
   background-color: #fff;
   border-color: #0d4cd3;
   box-shadow: 0 0 0 3px rgba(13, 76, 211, 0.1);
 }
 
-/* ========================================
-   Правая часть (Уведомления + Профиль)
-   ======================================== */
-
+/* Правая часть */
 .header-right {
   display: flex;
   align-items: center;
@@ -103,29 +115,40 @@
   flex-shrink: 0;
 }
 
+/* Разделитель */
+.header-divider {
+  width: 1px;
+  height: 40px; /* Увеличил высоту разделителя */
+  background-color: #e5e7eb;
+  margin: 0 8px;
+}
+
 /* Уведомления */
-.notifications-btn {
+.header-notifications-btn {
   position: relative;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 10px;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #6b7280;
 }
 
-.notifications-btn:hover {
+.header-notifications-btn:hover {
   background-color: #f2f3f7;
+  color: #0d4cd3;
 }
 
-.notification-icon {
-  font-size: 20px;
+.header-notification-icon {
+  width: 26px;
+  height: 26px;
 }
 
-.notification-badge {
+.header-notification-badge {
   position: absolute;
   top: 4px;
   right: 4px;
@@ -133,8 +156,8 @@
   color: #fff;
   font-size: 10px;
   font-weight: 700;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -142,63 +165,82 @@
   border: 2px solid #fff;
 }
 
-/* Профиль */
-.header-profile {
+/* Профиль пользователя */
+.header-user-profile {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.header-profile:hover {
+.header-user-profile:hover {
   background-color: #f2f3f7;
 }
 
-.profile-info {
+.header-user-info {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2px;
 }
 
-.profile-name {
-  font-size: 14px;
+.header-user-name {
+  font-size: 15px;
   font-weight: 600;
   color: #222;
   line-height: 1.2;
 }
 
-.profile-department {
+.header-user-department {
   font-size: 12px;
   color: #8590a6;
   line-height: 1.2;
 }
 
-.profile-avatar {
-  width: 40px;
-  height: 40px;
+.header-user-avatar {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg, #0d4cd3 0%, #0039a8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   flex-shrink: 0;
 }
 
-/* ========================================
-   Адаптивность
-   ======================================== */
+/* Адаптивность */
+@media (min-width: 1400px) {
+  .main-header {
+    padding: 0 60px;
+  }
+  
+  .header-search {
+    max-width: 700px;
+  }
+}
 
-/* Планшеты */
-@media (max-width: 1024px) {
-  .header {
-    padding: 0 24px;
+@media (max-width: 1200px) {
+  .main-header {
+    height: 100px; /* На планшетах чуть меньше */
+    min-height: 100px;
+    padding: 0 32px;
+  }
+  
+  .header-logo-image {
+    width: 150px; /* Чуть меньше на планшетах */
+    height: 150px;
+    max-width: 150px;
+    max-height: 150px;
+  }
+  
+  .header-logo-title {
+    font-size: 16px;
   }
   
   .header-search {
@@ -206,83 +248,47 @@
     margin: 0 24px;
   }
   
-  .profile-info {
-    display: none; /* Скрываем текст профиля на планшетах */
+  .header-user-info {
+    display: none;
   }
 }
 
-/* Мобильные */
 @media (max-width: 768px) {
-  .header {
+  .main-header {
+    height: 80px; /* На мобильных ещё меньше */
+    min-height: 80px;
     padding: 0 16px;
-    height: 56px;
   }
   
   .header-left {
-    flex: 1;
+    min-width: auto;
   }
   
-  .logo-text {
-    display: none; /* Скрываем текст логотипа на мобильных */
+  .header-logo-text {
+    display: none;
   }
   
-  .logo-image {
-    width: 32px;
-    height: 32px;
+  .header-logo-image {
+    width: 90px; /* На мобильных меньше */
+    height: 90px;
+    max-width: 90px;
+    max-height: 90px;
   }
   
   .header-search {
-    display: none; /* Скрываем поиск на мобильных */
+    display: none;
+  }
+  
+  .header-divider {
+    display: none;
   }
   
   .header-right {
-    gap: 12px;
+    gap: 8px;
   }
   
-  .profile-avatar {
-    width: 36px;
-    height: 36px;
-    font-size: 12px;
+  .header-user-avatar {
+    width: 40px;
+    height: 40px;
   }
-}
-
-
-/* Скрытие хэдера на определенных страницах */
-.header.hidden {
-  display: none;
-}
-
-/* Темная тема (на будущее) */
-.header.dark {
-  background-color: #1f2937;
-  border-bottom-color: #374151;
-}
-
-.header.dark .logo-title {
-  color: #60a5fa;
-}
-
-.header.dark .logo-subtitle {
-  color: #9ca3af;
-}
-
-.header.dark .search-input {
-  background-color: #374151;
-  color: #fff;
-}
-
-.header.dark .search-input::placeholder {
-  color: #9ca3af;
-}
-
-.header.dark .profile-name {
-  color: #fff;
-}
-
-.header.dark .header-profile:hover {
-  background-color: #374151;
-}
-
-.header.dark .notifications-btn:hover {
-  background-color: #374151;
 }
