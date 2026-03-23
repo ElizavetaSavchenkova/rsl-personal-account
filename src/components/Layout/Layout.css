@@ -11,21 +11,19 @@
   font-family: 'Lato', 'Arial', sans-serif;
 }
 
-/* Контейнер для контента (сайдбар + основная часть) */
+/* Должно быть так: */
 .layout-container {
   display: flex;
   flex: 1;
-  max-width: 1600px;
   width: 100%;
-  margin: 0 auto;
+
 }
 
-/* Основная область контента */
 .layout-main {
   flex: 1;
   padding: 24px 32px;
-  min-height: calc(100vh - 64px);
-  overflow-x: hidden;
+  min-width: 0; 
+  overflow-x: auto; 
 }
 
 /* ========================================

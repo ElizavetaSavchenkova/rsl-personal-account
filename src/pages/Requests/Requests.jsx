@@ -13,9 +13,9 @@ const Requests = () => {
   ];
 
   const myRequests = [
-    { 
-      id: 'REQ-2026-00142', 
-      type: 'Неисправность компьютера', 
+    {
+      id: 'REQ-2026-00142',
+      type: 'Неисправность компьютера',
       description: 'Не включается монитор на рабочем месте',
       dueDate: '05.03.2026',
       executor: 'IT-отдел',
@@ -23,9 +23,9 @@ const Requests = () => {
       priority: 'high',
       status: 'in_progress'
     },
-    { 
-      id: 'REQ-2026-00138', 
-      type: 'Продление пропуска', 
+    {
+      id: 'REQ-2026-00138',
+      type: 'Продление пропуска',
       description: 'Продление пропуска до конца года',
       dueDate: '10.03.2026',
       executor: 'Отдел безопасности',
@@ -33,9 +33,9 @@ const Requests = () => {
       priority: 'medium',
       status: 'approved'
     },
-    { 
-      id: 'REQ-2026-00125', 
-      type: 'Справка 2-НДФЛ', 
+    {
+      id: 'REQ-2026-00125',
+      type: 'Справка 2-НДФЛ',
       description: 'Справка за 2025 год',
       dueDate: '28.02.2026',
       executor: 'Бухгалтерия',
@@ -43,9 +43,9 @@ const Requests = () => {
       priority: 'low',
       status: 'completed'
     },
-    { 
-      id: 'REQ-2026-00118', 
-      type: 'Канцелярия', 
+    {
+      id: 'REQ-2026-00118',
+      type: 'Канцелярия',
       description: 'Ручки, бумага А4, папки',
       dueDate: '25.02.2026',
       executor: 'АХО',
@@ -65,13 +65,13 @@ const Requests = () => {
 
       {/* Табы */}
       <div className="tabs-container">
-        <button 
+        <button
           className={`tab ${activeTab === 'current' ? 'active' : ''}`}
           onClick={() => setActiveTab('current')}
         >
           Текущие
         </button>
-        <button 
+        <button
           className={`tab ${activeTab === 'all' ? 'active' : ''}`}
           onClick={() => setActiveTab('all')}
         >
@@ -93,8 +93,8 @@ const Requests = () => {
           ))}
         </div>
         <div className="search-box">
-          <input 
-            type="text" 
+          <input
+            type="text"
             placeholder="Поиск по заявкам..."
             className="search-input"
           />
@@ -102,12 +102,11 @@ const Requests = () => {
       </div>
 
       {/* Контейнер с таблицей */}
-      <div className="table-wrapper">
+      <div className="table-wrapper desktop-view">
         <div className="table-header">
           <h2 className="table-section-title">История заявок</h2>
         </div>
-        
-        <div className="table-scroll">
+        <div className="table-responsive">
           <table className="requests-table">
             <thead>
               <tr>
@@ -130,14 +129,14 @@ const Requests = () => {
                   <td>{request.executor}</td>
                   <td>{request.created}</td>
                   <td>
-                    <span className={`badge ${request.priority}`}>
+                    <span className={`badge priority-${request.priority}`}>
                       {request.priority === 'high' && 'Высокий'}
                       {request.priority === 'medium' && 'Средний'}
                       {request.priority === 'low' && 'Низкий'}
                     </span>
                   </td>
                   <td>
-                    <span className={`badge ${request.status}`}>
+                    <span className={`badge status-${request.status}`}>
                       {request.status === 'in_progress' && 'В работе'}
                       {request.status === 'approved' && 'Согласовано'}
                       {request.status === 'completed' && 'Выполнено'}
@@ -149,6 +148,41 @@ const Requests = () => {
           </table>
         </div>
       </div>
+      {/* Карточки для узких экранов */}
+<div className="cards-wrapper cards-view">
+  {myRequests.map((request) => (
+    <div key={request.id} className="request-card">
+      <div className="request-card-header">
+        <div className="request-card-title">{request.type}</div>
+        <span className={`badge priority-${request.priority}`}>
+          {request.priority === 'high' && 'Высокий'}
+          {request.priority === 'medium' && 'Средний'}
+          {request.priority === 'low' && 'Низкий'}
+        </span>
+      </div>
+      <div className="request-card-desc">{request.description}</div>
+      <div className="request-card-row">
+        <span className="request-card-label">Сделать до</span>
+        <span>{request.dueDate}</span>
+      </div>
+      <div className="request-card-row">
+        <span className="request-card-label">Исполнитель</span>
+        <span>{request.executor}</span>
+      </div>
+      <div className="request-card-row">
+        <span className="request-card-label">Создана</span>
+        <span>{request.created}</span>
+      </div>
+      <div className="request-card-footer">
+        <span className={`badge status-${request.status}`}>
+          {request.status === 'in_progress' && 'В работе'}
+          {request.status === 'approved' && 'Согласовано'}
+          {request.status === 'completed' && 'Выполнено'}
+        </span>
+      </div>
+    </div>
+  ))}
+</div>
     </div>
   );
 };

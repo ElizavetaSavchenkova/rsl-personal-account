@@ -139,8 +139,8 @@ const PersonalInfo = () => {
             <InfoRow label="Email" value={employee.manager.email} copyable />
           </div>
           <div className="card-actions">
-            <button className="btn-contact">📧 Написать письмо</button>
-            <button className="btn-contact">📞 Позвонить</button>
+            <button className="btn-contact">📧 Написать</button>
+            
           </div>
         </div>
 

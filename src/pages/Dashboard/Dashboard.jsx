@@ -2,30 +2,79 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
 
-// Данные для примера (потом заменим на API)
+// Данные для примера
 const userData = {
   name: 'Иван Иванович',
   department: 'Отдел комплектования',
-  tasksCount: 3,
+  tasksCount: 5,
   notificationsCount: 1,
   nextSalary: '31.03.2026',
   vacationDaysLeft: 28,
 };
 
-// Санитарные дни (последний четверг каждого месяца 2026)
-const sanitaryDays = [
-  '2026-01-29',
-  '2026-02-26',
-  '2026-03-26',
-  '2026-04-30',
-  '2026-05-28',
-  '2026-06-25',
-  '2026-07-30',
-  '2026-08-27',
-  '2026-09-24',
-  '2026-10-29',
-  '2026-11-26',
-  '2026-12-31',
+// Новости для карусели
+const newsCarousel = [
+  {
+    id: 1,
+    date: '03.03.2026',
+    title: 'Изменения в графике работы с 8 марта',
+    excerpt: 'В связи с праздничными днями график работы библиотеки меняется...',
+    category: 'Организация'
+  },
+  {
+    id: 2,
+    date: '28.02.2026',
+    title: 'Новая система бронирования читальных залов',
+    excerpt: 'Теперь забронировать место в читальном зале можно через личный кабинет...',
+    category: 'Технологии'
+  },
+  {
+    id: 3,
+    date: '25.02.2026',
+    title: 'Обучение работе с новыми базами данных',
+    excerpt: 'Приглашаем сотрудников на вебинар по работе с обновлёнными ресурсами...',
+    category: 'Обучение'
+  },
+  {
+    id: 4,
+    date: '20.02.2026',
+    title: 'Открытие выставки редких книг',
+    excerpt: 'В главном корпусе открылась выставка изданий XVIII века...',
+    category: 'События'
+  },
+  {
+    id: 5,
+    date: '15.02.2026',
+    title: 'Пополнение электронного каталога',
+    excerpt: 'В систему добавлено более 10 000 новых записей...',
+    category: 'Фонды'
+  },
+];
+
+// Функция для расчета последнего понедельника месяца
+const getLastMondayOfMonth = (year, month) => {
+  const lastDay = new Date(year, month + 1, 0);
+  let lastMonday = new Date(lastDay);
+  
+  // Идем назад, пока не найдем понедельник (1)
+  while (lastMonday.getDay() !== 1) {
+    lastMonday.setDate(lastMonday.getDate() - 1);
+  }
+  
+  const y = lastMonday.getFullYear();
+  const m = String(lastMonday.getMonth() + 1).padStart(2, '0');
+  const d = String(lastMonday.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+};
+
+// Праздничные и выходные дни 2026
+const holidays = [
+  '2026-01-01', '2026-01-02', '2026-01-03', '2026-01-04', 
+  '2026-01-05', '2026-01-06', '2026-01-07', '2026-01-08',
+  '2026-02-23',
+  '2026-03-08', '2026-03-09',
+  '2026-05-01', '2026-05-09', '2026-05-10', '2026-05-11',
+  '2026-06-12', '2026-11-04', '2026-12-31'
 ];
 
 const Dashboard = () => {
@@ -41,6 +90,9 @@ const Dashboard = () => {
         </p>
       </div>
 
+      {/* 📰 Карусель новостей */}
+      <NewsCarousel news={newsCarousel} />
+
       {/* Сетка виджетов */}
       <div className="dashboard-grid">
         
@@ -48,7 +100,6 @@ const Dashboard = () => {
         <div className="widget widget-tasks">
           <div className="widget-header">
             <h3>Мои задачи</h3>
-            
           </div>
           <div className="tasks-list">
             <div className="task-item urgent">
@@ -63,11 +114,19 @@ const Dashboard = () => {
               <div className="task-title">Утвердить решение о командировании...</div>
               <div className="task-date">До 10.04.2026</div>
             </div>
+            <div className="task-item">
+              <div className="task-title">Подготовить отчёт по фондам за март</div>
+              <div className="task-date">До 20.04.2026</div>
+            </div>
+            <div className="task-item">
+              <div className="task-title">Проверить поступление новых изданий</div>
+              <div className="task-status">В работе</div>
+            </div>
           </div>
-         <Link to="/tasks" className="widget-link">Все задачи →</Link>
+          <Link to="/tasks" className="widget-link">Все задачи →</Link>
         </div>
 
-        {/* Отпуска и отсутствие */}
+        {/* Отпуска + Зарплата */}
         <div className="widget widget-vacation">
           <h3>Отпуска и отсутствие</h3>
           <div className="vacation-info">
@@ -79,28 +138,19 @@ const Dashboard = () => {
               Осталось дней: <strong>{userData.vacationDaysLeft}</strong>
             </div>
           </div>
-
-            <h3>💰 Зарплата</h3>
-          <div className="salary-info">
-            <div className="salary-item">
-              <span className="salary-label">Следующая выплата:</span>
-              <span className="salary-value">{userData.nextSalary}</span>
-            </div>
-
-            {/*<div className="salary-item">
-              <span className="salary-label">Последний аванс:</span>
-              <span className="salary-value">25 000 ₽</span>
-            </div>*/}
-
-          </div>
-
-          <button className="btn btn-secondary">Расчётный листок</button>
+          <button className="btn btn-secondary">Подать заявление</button>
           
+          <div className="salary-section">
+            <h3 className="salary-title">💰 Зарплата</h3>
+            <div className="salary-info">
+              <div className="salary-item">
+                <span className="salary-label">Следующая выплата:</span>
+                <span className="salary-value">{userData.nextSalary}</span>
+              </div>
+            </div>
+            <button className="btn btn-secondary">Расчётный листок</button>
+          </div>
         </div>
-
-        
-
-        
 
         {/* Быстрые действия */}
         <div className="widget widget-quick-actions">
@@ -117,30 +167,10 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Календарь с санитарными днями */}
+        {/* Календарь */}
         <div className="widget widget-calendar">
           <h3>Календарь</h3>
-          <CalendarWidget currentDate={currentDate} sanitaryDays={sanitaryDays} />
-        </div>
-
-        {/* Новости */}
-        <div className="widget widget-news">
-          <h3>📢 Новости РГБ</h3>
-          <div className="news-list">
-            <div className="news-item">
-              <div className="news-date">03.03.2026</div>
-              <div className="news-title">Изменения в графике работы с 8 марта</div>
-            </div>
-            <div className="news-item">
-              <div className="news-date">28.02.2026</div>
-              <div className="news-title">Новая система бронирования читальных залов</div>
-            </div>
-            <div className="news-item">
-              <div className="news-date">25.02.2026</div>
-              <div className="news-title">Обучение работе с новыми базами данных</div>
-            </div>
-          </div>
-          <a href="/news" className="widget-link">Все новости →</a>
+          <CalendarWidget currentDate={currentDate} />
         </div>
 
       </div>
@@ -148,29 +178,103 @@ const Dashboard = () => {
   );
 };
 
+// 🎠 Компонент карусели новостей
+const NewsCarousel = ({ news }) => {
+  return (
+    <div className="news-carousel-wrapper">
+      <div className="news-carousel-header">
+        <h3>📢 Новости РГБ</h3>
+        <Link to="/news" className="news-carousel-link">Все новости →</Link>
+      </div>
+      
+      <div className="news-carousel" id="newsCarousel">
+        {news.map((item, index) => (
+          <div key={item.id} className="news-carousel-slide">
+            <div className="news-carousel-card">
+              <div className="news-carousel-category">{item.category}</div>
+              <div className="news-carousel-date">{item.date}</div>
+              <h4 className="news-carousel-title">{item.title}</h4>
+              <p className="news-carousel-excerpt">{item.excerpt}</p>
+              <div className="news-carousel-indicator">
+                {index + 1} / {news.length}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {/* Кнопки навигации */}
+      <button 
+        className="carousel-btn carousel-prev"
+        onClick={() => scrollCarousel(-1)}
+        aria-label="Предыдущая новость"
+      >
+        ◀
+      </button>
+      <button 
+        className="carousel-btn carousel-next"
+        onClick={() => scrollCarousel(1)}
+        aria-label="Следующая новость"
+      >
+        ▶
+      </button>
+    </div>
+  );
+};
+
+// Функция прокрутки карусели
+const scrollCarousel = (direction) => {
+  const carousel = document.getElementById('newsCarousel');
+  if (carousel) {
+    const slideWidth = carousel.clientWidth;
+    carousel.scrollBy({
+      left: direction * slideWidth,
+      behavior: 'smooth'
+    });
+  }
+};
+
 // Компонент календаря
-const CalendarWidget = ({ currentDate, sanitaryDays }) => {
-  const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-  const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+const CalendarWidget = ({ currentDate }) => {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDayOfMonth = new Date(year, month, 1).getDay();
+  const startOffset = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
   
   const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 
                       'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 
+const sanitaryDay = getLastMondayOfMonth(year, month);
+
   const isSanitaryDay = (day) => {
-    const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    return sanitaryDays.includes(dateStr);
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    return dateStr === sanitaryDay;
+  };
+
+  const isHoliday = (day) => {
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    return holidays.includes(dateStr);
   };
 
   const isWeekend = (day) => {
-    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    const date = new Date(year, month, day);
     const dayOfWeek = date.getDay();
     return dayOfWeek === 0 || dayOfWeek === 6;
+  };
+
+  const isToday = (day) => {
+    const today = new Date();
+    return day === today.getDate() && 
+           month === today.getMonth() && 
+           year === today.getFullYear();
   };
 
   return (
     <div className="calendar">
       <div className="calendar-header">
-        {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+        {monthNames[month]} {year}
       </div>
       <div className="calendar-grid">
         <div className="calendar-day-header">Пн</div>
@@ -181,32 +285,40 @@ const CalendarWidget = ({ currentDate, sanitaryDays }) => {
         <div className="calendar-day-header">Сб</div>
         <div className="calendar-day-header">Вс</div>
         
-        {Array.from({ length: (firstDayOfMonth + 6) % 7 }, (_, i) => (
+        {Array.from({ length: startOffset }, (_, i) => (
           <div key={`empty-${i}`} className="calendar-day calendar-day-empty"></div>
         ))}
         
         {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => {
           const sanitary = isSanitaryDay(day);
+          const holiday = isHoliday(day);
           const weekend = isWeekend(day);
-          const today = day === 4 && currentDate.getMonth() === 2; // 4 марта для примера
+          const today = isToday(day);
           
           return (
             <div 
               key={day} 
               className={`calendar-day 
                 ${today ? 'today' : ''} 
-                ${weekend ? 'weekend' : ''} 
-                ${sanitary ? 'sanitary' : ''}`}
-              title={sanitary ? 'Санитарный день в РГБ — библиотека закрыта для посетителей' : ''}
+                ${weekend || holiday ? 'weekend' : ''} 
+                ${sanitary ? 'sanitary' : ''}
+                ${holiday ? 'holiday' : ''}`}
+              title={
+                sanitary ? 'Санитарный день в РГБ — библиотека закрыта для посетителей' :
+                holiday ? 'Праздничный выходной день' :
+                weekend ? 'Выходной день' : ''
+              }
             >
               {day}
               {sanitary && <span className="sanitary-mark">🧹</span>}
+              {holiday && <span className="holiday-mark">🎉</span>}
             </div>
           );
         })}
       </div>
       <div className="calendar-legend">
         <span className="legend-item"><span className="legend-sanitary">🧹</span> Санитарный день</span>
+        <span className="legend-item"><span className="legend-holiday">🎉</span> Праздник</span>
         <span className="legend-item"><span className="legend-weekend"></span> Выходной</span>
       </div>
     </div>

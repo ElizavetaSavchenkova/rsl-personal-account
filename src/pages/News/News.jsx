@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import './News.css';
+import rgbImage from '../../assets/images/rgb.jpg';
+import newsImage from '../../assets/images/rgb.jpg'
+import rgbImg2 from '../../assets/images/rgb2.jpg'
+import rgbImg3 from '../../assets/images/rgb3.jpg'
+import rgbImg4 from '../../assets/images/rgb4.jpg'
+import rgbImg5 from '../../assets/images/rgb5.jpg'
 
 const News = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -13,29 +19,30 @@ const News = () => {
     { id: 'events', name: 'События' },
   ];
 
+  //const newsImage = 'https://via.placeholder.com/800x400/0d4cd3/ffffff?text=Будущее+библиотек';
+
   const news = [
-    {
+      {
       id: 1,
-      category: 'culture',
-      categoryName: 'Культура',
-      time: '12:00',
-      title: 'Необычные экскурсии в городских парках можно найти в сервисе «Мосбилет»',
-      excerpt: 'РГБ запускает серию пешеходных экскурсий по историческим местам Москвы с посещением редких книжных коллекций',
-      image: '🏛️',
-      featured: true,
-      date: '04.03.2026'
-    },
-    {
-      id: 2,
       category: 'social',
       categoryName: 'Социальная сфера',
       time: '12:02',
-      title: 'Сергей Собянин утвердил единовременные выплаты ветеранам ко Дню Победы',
-      excerpt: 'Сотрудники библиотеки — ветераны Великой Отечественной войны получат материальную помощь',
-      image: '🌸',
-      featured: true,
-      date: '04.03.2026'
+      title: 'Национальный центр «Россия» проведёт «Уроки географии»',
+      excerpt: 'В апреле Национальный центр «Россия» представит выставочный проект «Уроки географии»...',
+      image: rgbImg2,
+      date: '23.03.2026'
     },
+    {
+      id: 2,
+      category: 'culture',
+      categoryName: 'Культура',
+      time: '12:00',
+      title: 'Будущее библиотек',
+      excerpt: 'Стартовал второй сезон Всероссийского конкурса молодых лидеров библиотечного дела',
+      image: rgbImage,
+      date: '13.03.2026'
+    },
+  
     {
       id: 3,
       category: 'economy',
@@ -43,8 +50,7 @@ const News = () => {
       time: '10:05',
       title: 'Столичные предприятия нарастили выпуск лекарств для сердца и сосудов',
       excerpt: 'Библиотека пополнила фонд новыми медицинскими изданиями по кардиологии',
-      image: '💊',
-      featured: false,
+      image: rgbImg3,
       date: '04.03.2026'
     },
     {
@@ -54,8 +60,7 @@ const News = () => {
       time: '07:01',
       title: 'Более 400 тонн гуманитарной помощи передали московские профсоюзы в зону СВО',
       excerpt: 'Сотрудники РГБ также приняли участие в сборе книг для библиотек новых регионов',
-      image: '📦',
-      featured: false,
+      image: rgbImg4,
       date: '04.03.2026'
     },
     {
@@ -65,19 +70,7 @@ const News = () => {
       time: 'Вчера, 18:30',
       title: 'Открыт доступ к новой электронной коллекции редких книг XVIII века',
       excerpt: 'Оцифровано более 500 изданий из фонда редких книг РГБ',
-      image: '📚',
-      featured: false,
-      date: '03.03.2026'
-    },
-    {
-      id: 6,
-      category: 'events',
-      categoryName: 'События',
-      time: 'Вчера, 15:20',
-      title: 'В РГБ пройдет международная конференция «Библиотеки будущего»',
-      excerpt: '15-16 марта 2026 года. Регистрация открыта до 10 марта',
-      image: '🎤',
-      featured: false,
+      image: rgbImg5,
       date: '03.03.2026'
     },
   ];
@@ -85,33 +78,40 @@ const News = () => {
   const sideBlocks = [
     {
       id: 1,
-      title: 'Поддержка Москвы',
-      text: 'Узнайте, как столица помогает СВО и новым регионам',
+      title: 'Уважаемые коллеги!',
+      text: 'В связи с проблемами доступа в интернет в Москве возможны сбои при подключении к вай-фаю Библиотеки',
       color: 'blue',
-      icon: '⭐'
+      icon: '📶'
     },
     {
       id: 2,
-      title: 'Москва хороша с любого ракурса',
-      text: 'Смотрите и скачивайте лучшие фото и видео города',
+      title: 'Внимание!',
+      text: 'С 10 по 23 марта кофейня в третьем подъезде не работает.',
       color: 'red',
-      image: '🏛️'
+      image: '🥤'
     },
     {
       id: 3,
-      title: 'Заберите животное из приюта',
-      text: 'Найти верного друга поможет «Моспитомец»',
+      title: 'Временно закрыты!',
+      text: 'До 23 марта — читальный зал отдела рукописей будет закрыт',
       color: 'beige',
-      image: '🐶'
+      image: '📚'
+    },
+    {
+      id: 4,
+      title: 'Новое расписание!',
+      text: 'В расписание читального зала РГБ в ЕМиЦТ в апреле внесены изменения',
+      color: 'green',
+      image: '⏰'
     },
   ];
 
-  const filteredNews = selectedCategory === 'all' 
-    ? news 
+  const filteredNews = selectedCategory === 'all'
+    ? news
     : news.filter(n => n.category === selectedCategory);
 
-  const featuredNews = filteredNews.filter(n => n.featured);
-  const regularNews = filteredNews.filter(n => !n.featured);
+  const mainNews = filteredNews[0];
+  const gridNews = filteredNews.slice(1, 5); // Берём 4 новости для сетки
 
   return (
     <div className="news-page">
@@ -130,96 +130,84 @@ const News = () => {
         ))}
       </div>
 
-      <div className="news-layout">
-        {/* Основной контент */}
-        <div className="news-main">
-          {/* Главные новости */}
-          {featuredNews.length > 0 && (
-            <div className="featured-news">
-              {featuredNews.map((item, index) => (
-                <div 
-                  key={item.id} 
-                  className={`featured-card ${index === 0 ? 'main-featured' : 'secondary-featured'}`}
-                >
-                  <div className="featured-image">
-                    <span className="image-placeholder">{item.image}</span>
-                  </div>
-                  <div className="featured-content">
-                    <div className="news-meta">
-                      <span className="news-time">{item.time}</span>
-                      <span className="news-category">{item.categoryName}</span>
-                    </div>
-                    <h2 className="featured-title">{item.title}</h2>
-                    {index === 0 && (
-                      <p className="featured-excerpt">{item.excerpt}</p>
-                    )}
-                    <div className="news-date">{item.date}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Остальные новости */}
-          <div className="regular-news-grid">
-            {regularNews.map((item) => (
-              <article key={item.id} className="news-card">
-                <div className="news-card-image">
-                  <span className="image-placeholder">{item.image}</span>
-                </div>
-                <div className="news-card-content">
-                  <div className="news-meta">
-                    <span className="news-time">{item.time}</span>
-                    <span className="news-category">{item.categoryName}</span>
-                  </div>
-                  <h3 className="news-card-title">{item.title}</h3>
-                  <p className="news-card-excerpt">{item.excerpt}</p>
-                  <div className="news-date">{item.date}</div>
-                </div>
-              </article>
-            ))}
+      {/* 🔝 ПЕРВАЯ СЕТКА: Большая новость + 4 блока сбоку */}
+      <div className="news-section-top">
+        <div className="news-main-large">
+          <div className="news-large-image">
+            <img src={mainNews?.image} alt={mainNews?.title} />
           </div>
-
-          {filteredNews.length === 0 && (
-            <div className="empty-state">
-              <div className="empty-icon">📰</div>
-              <div className="empty-text">Новости не найдены</div>
+          <div className="news-large-content">
+            <div className="news-meta">
+              <span className="news-time">{mainNews?.time}</span>
+              <span className="news-category">{mainNews?.categoryName}</span>
             </div>
-          )}
+            <h2 className="news-large-title">{mainNews?.title}</h2>
+            <p className="news-large-excerpt">{mainNews?.excerpt}</p>
+            <div className="news-date">{mainNews?.date}</div>
+          </div>
         </div>
 
-        {/* Боковая панель */}
-        <aside className="news-sidebar">
+        <aside className="news-sidebar-full">
           {sideBlocks.map((block) => (
-            <div key={block.id} className={`side-block ${block.color}`}>
+            <div 
+              key={block.id} 
+              className={`side-block ${block.color}`}
+              style={block.id === 4 ? { minHeight: '180px' } : {}}
+            >
               <h3 className="side-block-title">{block.title}</h3>
               <p className="side-block-text">{block.text}</p>
               {block.icon && <span className="side-block-icon">{block.icon}</span>}
               {block.image && <span className="side-block-image">{block.image}</span>}
             </div>
           ))}
-
-          {/* Профсоюз РГБ */}
-          <div className="union-block">
-            <h3 className="union-title">📢 Профсоюз РГБ</h3>
-            <ul className="union-list">
-              <li className="union-item">
-                <span className="union-date">04.03</span>
-                <span className="union-text">Собрание профкома</span>
-              </li>
-              <li className="union-item">
-                <span className="union-date">01.03</span>
-                <span className="union-text">Выплата материальной помощи</span>
-              </li>
-              <li className="union-item">
-                <span className="union-date">28.02</span>
-                <span className="union-text">Поздравление с 23 февраля</span>
-              </li>
-            </ul>
-            <button className="btn-union">Все новости профсоюза</button>
-          </div>
         </aside>
       </div>
+
+      {/* 🔽 ВТОРАЯ СЕТКА: 2 колонки по 50%, в каждой по 2 новости */}
+      <div className="news-section-bottom">
+        <div className="news-grid-columns">
+          {/* Левая колонка */}
+          <div className="news-column">
+            {gridNews.slice(0, 2).map((item) => (
+              <article key={item.id} className="news-column-card">
+                <div className="news-column-image">
+                  <img src={item.image} alt={item.title} />
+                </div>
+                <div className="news-column-content">
+                  <div className="news-meta">
+                    <span className="news-time">{item.time}</span>
+                    <span className="news-category">{item.categoryName}</span>
+                  </div>
+                  <h3 className="news-column-title">{item.title}</h3>
+                  <p className="news-column-excerpt">{item.excerpt}</p>
+                  <div className="news-date">{item.date}</div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Правая колонка */}
+          <div className="news-column">
+            {gridNews.slice(2, 4).map((item) => (
+              <article key={item.id} className="news-column-card">
+                <div className="news-column-image">
+                  <img src={item.image} alt={item.title} />
+                </div>
+                <div className="news-column-content">
+                  <div className="news-meta">
+                    <span className="news-time">{item.time}</span>
+                    <span className="news-category">{item.categoryName}</span>
+                  </div>
+                  <h3 className="news-column-title">{item.title}</h3>
+                  <p className="news-column-excerpt">{item.excerpt}</p>
+                  <div className="news-date">{item.date}</div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 };

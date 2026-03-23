@@ -5,7 +5,7 @@ import './Sidebar.css';
 const menuItems = [
   { name: 'Главная', icon: '🏠', path: '/' },
   { name: 'Личная информация', icon: '👤', path: '/personal' },
-  { name: 'Задачи и поручения', icon: '📋', path: '/tasks', badge: 3 },
+  { name: 'Задачи и поручения', icon: '📋', path: '/tasks', badge: 5 },
   { name: 'Заявки', icon: '📝', path: '/requests' },
 
   // Раскрывающийся пункт "Сервисы"

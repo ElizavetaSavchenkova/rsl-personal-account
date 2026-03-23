@@ -12,6 +12,7 @@ import Profile from './pages/Profile/Profile';
 import Company from './pages/Company/Company';
 import News from './pages/News/News';
 import Certificates from './pages/Certificates/Certificates';
+import Tasks from './pages/Tasks/Tasks';
 import './App.css';
 
 function App() {
@@ -20,8 +21,8 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/personal" element={<PersonalInfo />} />й
-          <Route path="/tasks" element={<div>Задачи (в разработке)</div>} />
+          <Route path="/personal" element={<PersonalInfo />} />
+          <Route path="/tasks" element={<Tasks />} />
           <Route path="/accounting" element={<Accounting />} />
           <Route path="/vacation" element={<Vacation />} />
           <Route path="/requests" element={<Requests />} />
