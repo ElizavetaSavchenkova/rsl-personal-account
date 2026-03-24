@@ -95,7 +95,7 @@ const Vacation = () => {
       startDate: '15.01.2026', 
       endDate: '15.01.2026', 
       days: 1, 
-      reason: 'Свадьба', 
+      reason: 'По семейным обстоятельствам', 
       status: 'approved' 
     },
   ];
@@ -110,8 +110,17 @@ const Vacation = () => {
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <div className="vacation">
-      <h1 className="page-title">📅 Отпуска и отсутствия</h1>
+       <div className="vacation-page">
+    {/* Заголовок по центру */}
+    <h1 className="page-title">📅 Отпуска и отсутствие</h1>
+    
+    {/* Кнопка оформить отпуск слева */}
+    <div className="vacation-button-wrapper">
+      <button className="btn-vacation-primary" onClick={() => alert('Открыть форму заявления на отпуск')}>
+        <span className="btn-icon">✈️</span>
+        <span>Оформить отпуск</span>
+      </button>
+    </div>
 
       {/* Сводка по всем типам отпусков */}
       <div className="vacation-summary">

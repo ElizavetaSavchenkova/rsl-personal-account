@@ -30,21 +30,21 @@ const newsCarousel = [
   },
   {
     id: 3,
-    date: '25.02.2026',
+    date: '25.03.2026',
     title: 'Обучение работе с новыми базами данных',
     excerpt: 'Приглашаем сотрудников на вебинар по работе с обновлёнными ресурсами...',
     category: 'Обучение'
   },
   {
     id: 4,
-    date: '20.02.2026',
+    date: '20.03.2026',
     title: 'Открытие выставки редких книг',
     excerpt: 'В главном корпусе открылась выставка изданий XVIII века...',
     category: 'События'
   },
   {
     id: 5,
-    date: '15.02.2026',
+    date: '15.03.2026',
     title: 'Пополнение электронного каталога',
     excerpt: 'В систему добавлено более 10 000 новых записей...',
     category: 'Фонды'
@@ -141,7 +141,7 @@ const Dashboard = () => {
           <button className="btn btn-secondary">Подать заявление</button>
           
           <div className="salary-section">
-            <h3 className="salary-title">💰 Зарплата</h3>
+            <h3 className="salary-title">Зарплата</h3>
             <div className="salary-info">
               <div className="salary-item">
                 <span className="salary-label">Следующая выплата:</span>

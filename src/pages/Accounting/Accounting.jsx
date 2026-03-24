@@ -65,7 +65,7 @@ const Accounting = () => {
 
   return (
     <div className="accounting">
-      <h1 className="page-title">💰 Бухгалтерия</h1>
+      <h1 className="page-title">₽ Финансы</h1>
 
       {/* Сводка */}
       <div className="salary-summary">
@@ -78,7 +78,7 @@ const Accounting = () => {
           </div>
         </div>
 
-        <div className="summary-card vacation">
+        <div className="summary-card vacation1">
           <div className="summary-icon">🏖️</div>
           <div className="summary-info">
             <div className="summary-label">Остаток отпуска</div>

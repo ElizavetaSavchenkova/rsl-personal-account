@@ -13,6 +13,8 @@ import Company from './pages/Company/Company';
 import News from './pages/News/News';
 import Certificates from './pages/Certificates/Certificates';
 import Tasks from './pages/Tasks/Tasks';
+import SocialServices from './pages/SocialServices/SocialServices';
+import BusinessTrips from './pages/BusinessTrips/BusinessTrips';
 import './App.css';
 
 function App() {
@@ -31,7 +33,9 @@ function App() {
           <Route path="/training" element={<Training />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/company" element={<Company />} />
+          <Route path="/social" element={<SocialServices />} />
           <Route path="/news" element={<News />} />
+          <Route path="/trips" element={<BusinessTrips />} />
           <Route path="/communications" element={<div>Коммуникации (в разработке)</div>} />
         </Routes>
       </Layout>

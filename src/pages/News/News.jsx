@@ -6,6 +6,8 @@ import rgbImg2 from '../../assets/images/rgb2.jpg'
 import rgbImg3 from '../../assets/images/rgb3.jpg'
 import rgbImg4 from '../../assets/images/rgb4.jpg'
 import rgbImg5 from '../../assets/images/rgb5.jpg'
+import rgbImg6 from '../../assets/images/rgb6.jpg'
+import rgbImg7 from '../../assets/images/rgb7.jpg'
 
 const News = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -46,32 +48,32 @@ const News = () => {
     {
       id: 3,
       category: 'economy',
-      categoryName: 'Экономика и предпринимательство',
+      categoryName: 'Культура',
       time: '10:05',
-      title: 'Столичные предприятия нарастили выпуск лекарств для сердца и сосудов',
-      excerpt: 'Библиотека пополнила фонд новыми медицинскими изданиями по кардиологии',
-      image: rgbImg3,
-      date: '04.03.2026'
+      title: 'Презентация книги «Испания в огне»',
+      excerpt: 'Российская государственная библиотека 17 марта провела презентацию книги Пола Престона «Испания в огне»...',
+      image: rgbImg6,
+      date: '23.03.2026'
     },
     {
       id: 4,
       category: 'social',
       categoryName: 'Благотворительность',
       time: '07:01',
-      title: 'Более 400 тонн гуманитарной помощи передали московские профсоюзы в зону СВО',
-      excerpt: 'Сотрудники РГБ также приняли участие в сборе книг для библиотек новых регионов',
-      image: rgbImg4,
-      date: '04.03.2026'
+      title: 'В Ленинке поговорят о сказках',
+      excerpt: 'Радио РБК и Российская государственная библиотека запускают серию оффлайн-мероприятий...',
+      image: rgbImg7,
+      date: '23.03.2026'
     },
     {
       id: 5,
       category: 'library',
       categoryName: 'Библиотека',
       time: 'Вчера, 18:30',
-      title: 'Открыт доступ к новой электронной коллекции редких книг XVIII века',
-      excerpt: 'Оцифровано более 500 изданий из фонда редких книг РГБ',
+      title: 'Выставка «Ход конём»',
+      excerpt: 'Выставка, посвящённая китайскому Новому году, стала доброй традицией Центра восточной литературы...',
       image: rgbImg5,
-      date: '03.03.2026'
+      date: '19.03.2026'
     },
   ];
 

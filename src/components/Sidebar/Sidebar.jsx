@@ -14,13 +14,15 @@ const menuItems = [
     icon: '🛠️',
     path: null,
     children: [
-      { name: 'Бухгалтерия', icon: '💰', path: '/accounting' },
+      { name: 'Финансы', icon: '₽', path: '/accounting' },
       { name: 'Отпуска', icon: '📅', path: '/vacation' },
       { name: 'Справки', icon: '📄', path: '/certificates' },
+      { name: 'Социальные услуги', icon: '🤝', path: '/social' },
+      { name: 'Командировки', icon: '✈️', path: '/trips' }, 
     ]
   },
 
-  
+
   { name: 'Документы', icon: '📄', path: '/documents' },
   { name: 'Обучение и развитие', icon: '🎓', path: '/training' },
   { name: 'Компания', icon: '🏢', path: '/company' },
