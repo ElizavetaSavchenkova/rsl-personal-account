@@ -16,7 +16,6 @@ const News = () => {
     { id: 'all', name: 'Все новости' },
     { id: 'culture', name: 'Культура' },
     { id: 'social', name: 'Социальная сфера' },
-    { id: 'economy', name: 'Экономика' },
     { id: 'library', name: 'Библиотека' },
     { id: 'events', name: 'События' },
   ];
