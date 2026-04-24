@@ -7,6 +7,7 @@ const SocialServices = () => {
   const categories = [
     { id: 'all', name: 'Все услуги', icon: '📋' },
     { id: 'financial', name: 'Материальная помощь', icon: '₽' },
+    { id: 'health', name: 'Здоровье', icon: '🏥' },
     { id: 'culture', name: 'Культура и отдых', icon: '🎭' },
     { id: 'children', name: 'Детский отдых', icon: '👶' },
     { id: 'holidays', name: 'Праздники', icon: '🎁' },
@@ -59,6 +60,15 @@ const SocialServices = () => {
       description: 'Бесплатные экскурсии для сотрудников',
       icon: '🏛️',
       color: 'orange',
+      available: true,
+    },
+      {
+      id: 6,
+      category: 'health',
+      title: 'Здоровье',
+      description: 'Заявка в лечебный центр',
+      icon: '🏥',
+      color: 'green',
       available: true,
     },
 
